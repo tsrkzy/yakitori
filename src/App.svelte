@@ -4,9 +4,9 @@
     Link,
     Route
   } from "svelte-routing";
-  import Top from "./pages/Top.svelte";
-  import Gear from "./pages/Gear.svelte";
-  // import Test from "./pages/Test.svelte";
+  import Top from "./page/Top.svelte";
+  import Gear from "./page/Gear.svelte";
+  // import Test from "./page/Test.svelte";
 
 </script>
 
