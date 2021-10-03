@@ -15,10 +15,15 @@ export class Potential {
     this.id = parseInt(id, 10);
     this.name = name;
     this.description = description;
+    Potential.SetById(this.id, this);
   }
 
-  static GetById(id: number) {
+  static GetById(id: string) {
     return Potential.IdMap.get(id)
+  }
+
+  static SetById(id: number|string, p: Potential) {
+    Potential.IdMap.set(`${id}`, p)
   }
 
   static ImportTsv() {

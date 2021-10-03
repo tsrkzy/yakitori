@@ -46,10 +46,15 @@ export class OPPreset {
     this.Lv3 = parseFloat(Lv3);
     this.Lv4 = parseFloat(Lv4);
     this.Lv5 = parseFloat(Lv5);
+    OPPreset.SetById(this.id, this);
   }
 
-  static GetById(id: number) {
+  static GetById(id: string) {
     return OPPreset.IdMap.get(id)
+  }
+
+  static SetById(id: number|string, p: OPPreset) {
+    OPPreset.IdMap.set(`${id}`, p)
   }
 
   static ImportTsv() {
@@ -78,7 +83,6 @@ export class OPPreset {
       }
       const p = new OPPreset(args)
       presetList.push(p);
-      OPPreset.IdMap.set(p.id, p);
     }
 
     OPPreset.Instances = presetList;

@@ -48,16 +48,25 @@ export class Weapon {
     this.potentialId = parseInt(potentialId, 10);
     this.updatePotential();
     this.updatePreset();
+    Weapon.SetById(this.id, this);
   }
 
   updatePotential() {
-    const p = Potential.GetById(this.potentialId);
+    const p = Potential.GetById(`${this.potentialId}`);
     this.potential = p;
   }
 
   updatePreset() {
-    const p = OPPreset.GetById(this.presetId);
+    const p = OPPreset.GetById(`${this.presetId}`);
     this.preset = p;
+  }
+
+  static GetById(id: string|number) {
+    return Weapon.IdMap.get(id)
+  }
+
+  static SetById(id: number|string, w: Weapon) {
+    Weapon.IdMap.set(`${id}`, w)
   }
 
   static ImportTsv() {
@@ -84,7 +93,6 @@ export class Weapon {
       }
       const w = new Weapon(args)
       weaponList.push(w);
-      Weapon.IdMap.set(w.id, w);
     }
 
     Weapon.Instances = weaponList;
@@ -94,7 +102,7 @@ export class Weapon {
   static GetData() {
     OPPreset.ImportTsv();
     Potential.ImportTsv();
-    const weaponList =  Weapon.ImportTsv()
+    const weaponList = Weapon.ImportTsv()
     console.log("weapon.GetData", weaponList);
     return weaponList
   }
